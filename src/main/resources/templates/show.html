@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Show</title>
+  <meta charset="UTF-8">
+  <title>Show</title>
 </head>
 
 <body>
@@ -11,10 +11,7 @@
 <p th:text="${'LastName: ' + user.getLastName()}">VALUE</p>
 <p th:text="${'Email: ' + user.getEmail()}">VALUE</p>
 
-<td><a th:href="@{/admin/edit/{id}(id=${user.id})}">update</a></td>
 
-<form th:method="DELETE" th:action="@{/admin/delete/{id}(id =${user.id})}">
-    <input type="submit" value="Delete"/>
 </form>
 
 <br>
