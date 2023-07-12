@@ -21,12 +21,22 @@
   <label for="password">Enter password</label>
   <input type="text" th:field="*{password}" id="password"/>
   <br>
+  <p>
+    <label>Roles:
+      <input type="checkbox" name="authorities"
+             th:each="role : ${allRoles}"
+             th:text="${role.getRole()}"
+             th:value="${role.getId()}"
+             th:checked="${user.roles.contains(role)}"
+      />
+    </label>
+  </p>
+  <br>
   <input type="submit" value="Update!"/>
+  <br>
+  <br>
+  <a href="/logout">Logout</a>
 </form>
-
-<br>
-<br>
-<a href="/logout">Logout</a>
 
 </body>
 
