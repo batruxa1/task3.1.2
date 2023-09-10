@@ -40,18 +40,6 @@ public class AdminController {
         return "user";
     }
 
-//    @GetMapping("/new")
-//    public String newUser(Model model) {
-//        model.addAttribute("user", new User());
-//        return "new";
-//    }
-//
-//    @PostMapping()
-//    public String create(@ModelAttribute("user") User user) {
-//        userService.add(user);
-//        return "redirect:/admin";
-//    }
-
     @GetMapping("/new")
     public String newUser(Model model) {
         model.addAttribute(new User());
@@ -64,26 +52,17 @@ public class AdminController {
     public String addUser(@Validated(User.class) @ModelAttribute("user") User user,
                           @RequestParam("authorities") List<String> values,
                           BindingResult result) {
-        if(result.hasErrors()) {
-            return "error";
-        }
+//        values.forEach(System.out::println);
+//        if(result.hasErrors()) {
+//            return "error";
+//        }
         Set<Role> roles = userService.getSetOfRoles(values);
         user.setRoles(roles);
         userService.add(user);
         return "redirect:/admin";
     }
 
-//    @GetMapping("edit/{id}")
-//    public String edit(Model model, @PathVariable("id") int id) {
-//        model.addAttribute("user", userService.getUserById(id));
-//        return "edit";
-//    }
-//
-//    @PostMapping("{id}")
-//    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") int id) {
-//        userService.updateUser(user);
-//        return "redirect:/admin";
-//    }
+
 
     @GetMapping("edit/{id}")
     public String edit(@PathVariable("id") int id, Model model) {

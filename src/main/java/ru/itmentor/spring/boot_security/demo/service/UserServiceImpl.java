@@ -14,11 +14,12 @@ import java.util.Set;
 @Service
 public class  UserServiceImpl implements UserService{
     private final UsersRepository usersRepository;
-    private RoleService roleService;
+    private final RoleService roleService;
 
     @Autowired
-    public UserServiceImpl(UsersRepository usersRepository) {
+    public UserServiceImpl(UsersRepository usersRepository, RoleService roleService) {
         this.usersRepository = usersRepository;
+        this.roleService = roleService;
     }
 
     @Transactional(readOnly = true)
@@ -35,7 +36,7 @@ public class  UserServiceImpl implements UserService{
 
     @Transactional(readOnly = true)
     @Override
-    public User getUserById(int id) {
+    public User getUserById(long id) {
         return usersRepository.findById(id).get();
     }
 
@@ -47,13 +48,14 @@ public class  UserServiceImpl implements UserService{
 
     @Transactional
     @Override
-    public void deleteUser(int id) {
+    public void deleteUser(long id) {
         usersRepository.deleteById(id);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Set<Role> getSetOfRoles(List<String> roleId) {
+        roleId.forEach(System.out::println);
         Set<Role> roleSet = new HashSet<>();
         for (String id: roleId) {
             roleSet.add(roleService.getRoleById(Long.parseLong(id)));

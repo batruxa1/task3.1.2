@@ -8,7 +8,7 @@ import ru.itmentor.spring.boot_security.demo.model.User;
 
 
 @Repository
-public interface UsersRepository extends JpaRepository <User, Integer> {
+public interface UsersRepository extends JpaRepository <User, Long> {
     @Query("SELECT u FROM User u WHERE u.userName = :username")
     User findByUserName(String username);
 
